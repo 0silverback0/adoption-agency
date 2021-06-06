@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% block title %}Add a Pet{% endblock %}
+
+{% block content %}
+
+<form action="/add", method="POST">
+
+{{ form.hidden_tag() }}
+        {% for field in form 
+            if field.widget.input_type != 'hidden' %}
+        <p>
+            {{field.label}}
+            {{field(class_='form-control')}}
+
+            {% for err in field.errors %}
+            <small class="text-danger">{{err}}</small>
+            {% endfor %}
+        </p>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a href="/" class="btn btn-danger">Cancel</a>
+</form>
+
+{% endblock %}
